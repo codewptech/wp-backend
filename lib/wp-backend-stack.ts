@@ -1,16 +1,15 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { SPADeploy } from 'cdk-spa-deploy';
 
 export class WpBackendStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'WpBackendQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    // code start
+    new SPADeploy(this, 'wp-webphin').createSiteWithCloudfront({
+      indexDoc: 'index.html',
+      websiteFolder: '../wp-frontenf/dist/',
+    });
+    // code end
   }
 }
